@@ -1,15 +1,11 @@
 import discord
+from discord.ext import commands
 import requests
 import json
 
-client = discord.Client()
 
-def get_bird_sound():
-    response = requests.get("https://www.xeno-canto.org/api/2/recordings?query=cnt:brazil")
-    json_data = json.loads(response.text)
-    res = json_data
-    print(res["recordings"][0]["url"])
-    return(res["recordings"][0]["url"])
+client2 = commands.Bot(command_prefix= '!')
+client = discord.Client()
 
 def get_bird_fact_photo():
     response = requests.get("https://some-random-api.ml/animal/birb")
@@ -29,6 +25,8 @@ def get_bird_photo():
     image = json_data
     return(image['image'])
 
+
+@client.event
 
 @client.event
 async def on_ready():
@@ -54,8 +52,4 @@ async def on_message(message):
         fact = get_bird_fact()
         await message.channel.send(fact)
 
-    if message.content.startswith('/sound'):
-        sound = get_bird_sound()
-        await message.channel.send(sound)
-
-client.run('ODc0NzIwMDcxNDM4NzI5MjM3.YRLEjA._6CrhfiGt-o4ztvDSBGN6mQddLk')
+client.run('ODc0NzIwMDcxNDM4NzI5MjM3.YRLEjA.ySjX6KfOz870beIucgxR4q-pCj0')
